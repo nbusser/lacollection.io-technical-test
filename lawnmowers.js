@@ -1,4 +1,4 @@
-const DIRECTIONS = ['N', 'S', 'W', 'E'];
+const ORIENTATIONS = ['N', 'E', 'S', 'W'];
 
 const lawnmowers = [];
 
@@ -27,7 +27,7 @@ const is_pos_included = (pos) => {
     );
 };
 
-const add_lawnmower = (pos, direction) => {
+const add_lawnmower = (pos, orientation) => {
     if (top_right_position === null) {
         throw 'Top right position is not initilized yet';
     }
@@ -36,31 +36,31 @@ const add_lawnmower = (pos, direction) => {
         throw 'Lawnmower cannot be spawned outside of the garden';
     }
 
-    if (DIRECTIONS.find((dir) => {return dir === direction;}) === undefined) {
-        throw 'Direction is invalid';
+    if (ORIENTATIONS.find(dir => {return dir === orientation;}) === undefined) {
+        throw 'Orientation is invalid';
     }
 
-    const lawnmover = {pos, direction,};
+    const lawnmover = {pos, orientation,};
     lawnmowers.push(lawnmover);
 
     return lawnmover;
 };
 
-const move_lawnmower = (lawnmover, direction) => {
+const move_lawnmower = (lawnmover, orientation) => {
     // Copying lawnmower pos
     let next_pos = {x: lawnmover.pos.x, y: lawnmover.pos.y,};
 
-    switch (direction) {
-        case DIRECTIONS[0]:
+    switch (orientation) {
+        case 'N':
             next_pos.y += 1;
             break;
-        case DIRECTIONS[1]:
+        case 'S':
             next_pos.y -= 1;
             break;
-        case DIRECTIONS[2]:
+        case 'W':
             next_pos.x -= 1;
             break;
-        case DIRECTIONS[3]:
+        case 'E':
             next_pos.x += 1;
             break;
     };
@@ -73,7 +73,7 @@ const move_lawnmower = (lawnmover, direction) => {
 };
 
 const print_lawnmower_infos = (lawnmover) => {
-    console.log(`Lawnmower info: pos (${lawnmover.pos.x}, ${lawnmover.pos.y}) facing ${lawnmover.direction}`);
+    console.log(`Lawnmower info: pos (${lawnmover.pos.x}, ${lawnmover.pos.y}) facing ${lawnmover.orientation}`);
 };
 
 const print_all_lawnmowers_infos = () => {

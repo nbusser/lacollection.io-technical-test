@@ -41,10 +41,10 @@ const add_lawnmower = (pos, orientation) => {
         throw 'Orientation is invalid';
     }
 
-    const lawnmover = {pos, orientation,};
-    lawnmowers.push(lawnmover);
+    const lawnmower = {pos, orientation,};
+    lawnmowers.push(lawnmower);
 
-    return lawnmover;
+    return lawnmower;
 };
 
 const move_lawnmower = (lawnmower, direction) => {

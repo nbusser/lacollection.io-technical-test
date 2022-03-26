@@ -12,7 +12,7 @@ const set_top_right_position = (pos) => {
         throw 'Top right position can only be initialized once';
     }
 
-    if (pos.x < 0 || pos.y < y) {
+    if (pos.x < 0 || pos.y < 0) {
         throw 'Only positive coordinates are allowed';
     }
 

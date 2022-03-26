@@ -1,4 +1,5 @@
 const ORIENTATIONS = ['N', 'E', 'S', 'W'];
+const DIRECTIONS = ['D', 'G', 'A'];
 
 const lawnmowers = [];
 
@@ -46,30 +47,41 @@ const add_lawnmower = (pos, orientation) => {
     return lawnmover;
 };
 
-const move_lawnmower = (lawnmover, orientation) => {
-    // Copying lawnmower pos
-    let next_pos = {x: lawnmover.pos.x, y: lawnmover.pos.y,};
-
-    switch (orientation) {
-        case 'N':
-            next_pos.y += 1;
+const move_lawnmower = (lawnmower, direction) => {
+    const orIndex = ORIENTATIONS.findIndex(or => {return or === lawnmower.orientation});
+    switch (direction) {
+        case 'D':
+            lawnmower.orientation = ORIENTATIONS[(orIndex+1)%ORIENTATIONS.length];
             break;
-        case 'S':
-            next_pos.y -= 1;
+        case 'G':
+            lawnmower.orientation = ORIENTATIONS[(orIndex-1)%ORIENTATIONS.length];
             break;
-        case 'W':
-            next_pos.x -= 1;
+        case 'A':
+            // Copying lawnmower pos
+            let next_pos = {x: lawnmower.pos.x, y: lawnmower.pos.y,};
+            switch (lawnmower.orientation) {
+                case 'N':
+                    next_pos.y += 1;
+                    break;
+                case 'S':
+                    next_pos.y -= 1;
+                    break;
+                case 'W':
+                    next_pos.x -= 1;
+                    break;
+                case 'E':
+                    next_pos.x += 1;
+                    break;
+            };
+            // If the new pos is inside the garden, updates coordinates
+            // Else, stays at the same position
+            if (is_pos_included(next_pos)) {
+                lawnmower.pos = next_pos;
+            }
             break;
-        case 'E':
-            next_pos.x += 1;
-            break;
+        default:
+            throw `"${direction}" is not a valid direction`;
     };
-
-    // If the new pos is inside the garden, updates coordinates
-    // Else, stays at the same position
-    if (is_pos_included(next_pos)) {
-        lawnmover.pos = next_pos;
-    }
 };
 
 const print_lawnmower_infos = (lawnmover) => {

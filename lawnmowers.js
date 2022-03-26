@@ -54,11 +54,16 @@ const move_lawnmower = (lawnmower, direction) => {
             lawnmower.orientation = ORIENTATIONS[(orIndex+1)%ORIENTATIONS.length];
             break;
         case 'G':
-            lawnmower.orientation = ORIENTATIONS[(orIndex-1)%ORIENTATIONS.length];
+            if (orIndex === 0) {
+                lawnmower.orientation = ORIENTATIONS[ORIENTATIONS.length-1];
+            } else {
+                lawnmower.orientation = ORIENTATIONS[orIndex-1]
+            }
             break;
         case 'A':
             // Copying lawnmower pos
             let next_pos = {x: lawnmower.pos.x, y: lawnmower.pos.y,};
+
             switch (lawnmower.orientation) {
                 case 'N':
                     next_pos.y += 1;

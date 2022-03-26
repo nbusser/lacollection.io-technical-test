@@ -1,8 +1,4 @@
-const NORTH = 0;
-const SOUTH = 1;
-const WEST = 2;
-const EAST = 3;
-const N_DIRECTIONS = 4;
+const DIRECTIONS = ['N', 'S', 'W', 'E'];
 
 const lawnmowers = [];
 
@@ -40,9 +36,12 @@ const add_lawnmower = (pos, direction) => {
         throw 'Lawnmower cannot be spawned outside of the garden';
     }
 
-    if (direction < 0 || direction > N_DIRECTIONS) {
+    if (DIRECTIONS.find((dir) => {return dir === direction;}) === undefined) {
         throw 'Direction is invalid';
     }
 
-    lawnmowers.push({pos, direction,});
+    const lawnmover = {pos, direction,};
+    lawnmowers.push(lawnmover);
+
+    return lawnmover;
 };

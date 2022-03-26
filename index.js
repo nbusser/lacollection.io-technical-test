@@ -9,10 +9,10 @@ let top_right_position = null;
 
 const set_top_right_position = (pos) => {
     if (top_right_position !== null) {
-        console.error('Top right position can only be initialized once');
+        throw 'Top right position can only be initialized once';
     }
     else if (pos.x < 0 || pos.y < y) {
-        console.error('Only positive coordinates are allowed');
+        throw 'Only positive coordinates are allowed';
     }
     else {
         top_right_position = pos;
@@ -21,8 +21,7 @@ const set_top_right_position = (pos) => {
 
 const is_pos_included = (pos) => {
     if(top_right_position === null) {
-        console.error('Top right position is not initilized yet');
-        return;
+        throw 'Top right position is not initilized yet';
     }
 
     return (
@@ -33,7 +32,6 @@ const is_pos_included = (pos) => {
 
 const add_lawnmower = (pos, direction) => {
     if (top_right_position === null) {
-        console.error('Top right position is not initilized yet');
-        return;
+        throw 'Top right position is not initilized yet';
     }
 };

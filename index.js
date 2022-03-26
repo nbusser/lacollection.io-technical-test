@@ -15,6 +15,7 @@ for (let i = 1; i < lines.length; i += 2) {
 
     const lawnmower_path = [...lines[i+1]];
     lawnmower_path.forEach(direction => {
-        console.log(direction);
+        api.move_lawnmower(landmower, direction);
     });
+    api.print_lawnmower_infos(landmower);
 }

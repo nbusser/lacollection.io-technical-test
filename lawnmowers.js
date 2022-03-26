@@ -33,6 +33,10 @@ const add_lawnmower = (pos, orientation) => {
         throw 'Top right position is not initilized yet';
     }
 
+    if (typeof(pos.x) !== 'number' || typeof(pos.y) !== 'number') {
+        throw 'Positions are not numbers';
+    }
+
     if (!is_pos_included(pos)) {
         throw 'Lawnmower cannot be spawned outside of the garden';
     }

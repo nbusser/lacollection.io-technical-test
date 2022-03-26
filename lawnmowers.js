@@ -1,10 +1,11 @@
+// All valid orientations, displayed in circle
 const ORIENTATIONS = ['N', 'E', 'S', 'W'];
-const DIRECTIONS = ['D', 'G', 'A'];
 
 const lawnmowers = [];
 
 let top_right_position = null;
 
+// Must be called before placing around the objects
 const set_top_right_position = (pos) => {
     if (top_right_position !== null) {
         throw 'Top right position can only be initialized once';
@@ -17,6 +18,7 @@ const set_top_right_position = (pos) => {
     top_right_position = pos;
 };
 
+// Checks if a position is out of bound
 const is_pos_included = (pos) => {
     if(top_right_position === null) {
         throw 'Top right position is not initilized yet';
@@ -28,6 +30,7 @@ const is_pos_included = (pos) => {
     );
 };
 
+// Giving a pos (x, y) and an orientation, creates a lawnmower
 const add_lawnmower = (pos, orientation) => {
     if (top_right_position === null) {
         throw 'Top right position is not initilized yet';
@@ -51,12 +54,17 @@ const add_lawnmower = (pos, orientation) => {
     return lawnmower;
 };
 
+// Moves a lawnmower along a direction 'D' (right), 'G' (left) or 'A' (forward)
 const move_lawnmower = (lawnmower, direction) => {
+    // Gets the index of the current orientation in the ORIENTATION array
     const orIndex = ORIENTATIONS.findIndex(or => {return or === lawnmower.orientation});
     switch (direction) {
+        // Turns the lawnmover 90° to the right
         case 'D':
+            // Just plays with the orientation index
             lawnmower.orientation = ORIENTATIONS[(orIndex+1)%ORIENTATIONS.length];
             break;
+        // Turns the lawnmover 90° to the left
         case 'G':
             if (orIndex === 0) {
                 lawnmower.orientation = ORIENTATIONS[ORIENTATIONS.length-1];
@@ -64,6 +72,7 @@ const move_lawnmower = (lawnmower, direction) => {
                 lawnmower.orientation = ORIENTATIONS[orIndex-1]
             }
             break;
+        // Moves the lawnmower forward
         case 'A':
             // Copying lawnmower pos
             let next_pos = {x: lawnmower.pos.x, y: lawnmower.pos.y,};

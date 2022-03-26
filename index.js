@@ -45,3 +45,39 @@ const add_lawnmower = (pos, direction) => {
 
     return lawnmover;
 };
+
+const move_lawnmower = (lawnmover, direction) => {
+    // Copying lawnmower pos
+    let next_pos = {x: lawnmover.pos.x, y: lawnmover.pos.y,};
+
+    switch (direction) {
+        case DIRECTIONS[0]:
+            next_pos.y += 1;
+            break;
+        case DIRECTIONS[1]:
+            next_pos.y -= 1;
+            break;
+        case DIRECTIONS[2]:
+            next_pos.x -= 1;
+            break;
+        case DIRECTIONS[3]:
+            next_pos.x += 1;
+            break;
+    };
+
+    // If the new pos is inside the garden, updates coordinates
+    // Else, stays at the same position
+    if (is_pos_included(next_pos)) {
+        lawnmover.pos = next_pos;
+    }
+};
+
+const print_lawnmower_infos = (lawnmover) => {
+    console.log(`Lawnmower info: pos (${lawnmover.pos.x}, ${lawnmover.pos.y}) facing ${lawnmover.direction}`);
+};
+
+const print_all_lawnmowers = () => {
+    lawnmowers.forEach(lawnmower => {
+        print_lawnmower_infos(lawnmower);
+    });
+};

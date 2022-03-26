@@ -11,12 +11,12 @@ const set_top_right_position = (pos) => {
     if (top_right_position !== null) {
         throw 'Top right position can only be initialized once';
     }
-    else if (pos.x < 0 || pos.y < y) {
+
+    if (pos.x < 0 || pos.y < y) {
         throw 'Only positive coordinates are allowed';
     }
-    else {
-        top_right_position = pos;
-    }
+
+    top_right_position = pos;
 };
 
 const is_pos_included = (pos) => {

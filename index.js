@@ -1,7 +1,7 @@
-const North = 0;
-const South = 1;
-const West = 2;
-const East = 3;
+const NORTH = 0;
+const SOUTH = 1;
+const WEST = 2;
+const EAST = 3;
 
 const lawnmowers = [];
 
